@@ -1,0 +1,1 @@
+### 1，环境变量设置：export LD_LIBRARY_PATH=./lib

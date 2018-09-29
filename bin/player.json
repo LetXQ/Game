@@ -1,0 +1,17 @@
+{
+	"version": 0,
+	"contents":{
+		"ID": 1,
+		"Name": "Leon",
+		"Hobbies": [
+			"running",
+			"fishing",
+			"swiming"
+		],
+		"Scores":{
+			"Chinese": 99,
+			"English": 88,
+			"Math": 100
+		}
+	}
+}
