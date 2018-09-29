@@ -3,17 +3,18 @@ LIB_PATH = ./lib
 LOCAL_LIBS = jsoncpp
 LIBS = pthread
 INCLUDES = ./include/
-FLAGS = std=c++11 -g 
+FLAGS = std=c++11 -g -Wall
 OFLAGS = fPIC -shared
-SRCS = ./src/json/*.cpp
+JSON_SRCS = ./src/json/*.cpp
+SRCS = ./src/config/*.cpp ./test.cpp
 	
-test: test.cpp
+test: $(SRCS)
 	g++ $^ -g -o $@ -$(FLAGS) -I$(INCLUDES) -L$(LIB_PATH) -l$(LOCAL_LIBS) -l$(LIBS)
 	
 #server: server.cpp
 #	g++ $^ -g -o $@ -$(FLAGS) -I$(INCLUDES) -L$(LIB_PATH) -l$(LOCAL_LIBS) -l$(LIBS)
 	
-libjsoncpp.so: $(SRCS)
+libjsoncpp.so: $(JSON_SRCS)
 	g++ $^ -g -o $@ -$(FLAGS) -$(OFLAGS) -I$(INCLUDES) -l$(LIBS) 
 	
 .PHONY : clean
