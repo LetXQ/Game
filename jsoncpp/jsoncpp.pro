@@ -11,7 +11,9 @@ SOURCES += \
     ../src/json/json_valueiterator.inl \
     ../src/json/json_writer.cpp \
     ../test.cpp \
-    ../src/config/mapconfig.cpp
+    ../src/config/mapconfig.cpp \
+    ../src/obj_move/astar.cpp \
+    ../src/common/lock.cpp
 
 HEADERS += \
     ../include/json/autolink.h \
@@ -27,7 +29,9 @@ HEADERS += \
     ../include/common/singleton.h \
     ../include/common/common_def.h \
     ../include/common/common_func.h \
-    ../include/common/world_pos.h
+    ../include/common/world_pos.h \
+    ../include/obj_move/astar.h \
+    ../include/common/lock.h
 
 DISTFILES += \
     ../src/json/sconscript

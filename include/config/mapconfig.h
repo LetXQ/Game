@@ -19,6 +19,8 @@ enum AreaType
 struct MapInfo
 {
     int32_t vision_size = 0;
+    int32_t grid_col = 0;
+    int32_t grid_row = 0;
     Point start_pos;
     Point end_pos;
     int8_t** grid_infos;
@@ -30,6 +32,7 @@ public:
     bool ParseConfigFile(const std::string& file_name);
     void PrintConfigs() const;
     const MapInfo& GetMapInfo() const;
+    bool IsBlockGrid(int32_t x_grid, int32_t y_grid);
 private:
     bool ParseJsonVal(Json::Value& msg);
     bool ParseSettingInfo(Json::Value& msg);

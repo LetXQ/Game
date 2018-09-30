@@ -10,5 +10,12 @@
             } \
         }
 
+#define SAVE_DELETES(x) { \
+            if (x) { \
+                delete [] x; \
+                x = nullptr; \
+            } \
+        }
+
 
 #endif // COMMON_DEF_H

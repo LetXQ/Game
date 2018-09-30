@@ -1,5 +1,6 @@
 #ifndef WORLD_POS_H
 #define WORLD_POS_H
+#include <list>
 
 struct Point
 {
@@ -10,5 +11,5 @@ struct Point
     double x = 0;
     double y = 0;
 };
-
+using PointList = std::list<Point>;
 #endif // WORLD_POS_H

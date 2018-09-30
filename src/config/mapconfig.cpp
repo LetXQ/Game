@@ -28,6 +28,29 @@ const MapInfo &MapConfig::GetMapInfo() const
     return m_map_info;
 }
 
+bool MapConfig::IsBlockGrid(int32_t x_grid, int32_t y_grid)
+{
+    int32_t tmp_x = x_grid, tmp_y = y_grid;
+    if (x_grid < 0)
+    {
+        tmp_x = 0;
+    }
+    else if (x_grid >= m_map_info.grid_col)
+    {
+        tmp_x = m_map_info.grid_col - 1;
+    }
+    if (y_grid < 0)
+    {
+        tmp_y = 0;
+    }
+    else if (y_grid >= m_map_info.grid_row)
+    {
+        tmp_y = m_map_info.grid_row - 1;
+    }
+
+    return !(m_map_info.grid_infos[tmp_x][tmp_y] == T_FREE_AREA);
+}
+
 bool MapConfig::ParseJsonVal(Json::Value &msg)
 {
     if (msg["MapInfo"].isNull() || msg["SettingInfo"].isNull())
@@ -68,27 +91,27 @@ bool MapConfig::ParsseMapInfo(Json::Value &msg)
     std::vector<std::string> grids_vec;
     CommonFuncs::ParseStringVectorByKey(msg, "GridInfo", grids_vec);
 
-    int32_t col = abs(m_map_info.end_pos.x - m_map_info.start_pos.x);
-    int32_t row = abs(m_map_info.end_pos.y - m_map_info.start_pos.y);
-    if (grids_vec.empty() || (int32_t)grids_vec.size() != row)
+    m_map_info.grid_col = abs(m_map_info.end_pos.x - m_map_info.start_pos.x) / 100;
+    m_map_info.grid_row = abs(m_map_info.end_pos.y - m_map_info.start_pos.y) / 100;
+    if (grids_vec.empty() || (int32_t)grids_vec.size() != m_map_info.grid_row)
     {
         std::cout << (grids_vec.empty() ? "Emtpy" : "Not Empty") << std::endl;
-        std::cout << "Row " << row << ", size: " << grids_vec.size() << std::endl;
+        std::cout << "Row " << m_map_info.grid_row << ", size: " << grids_vec.size() << std::endl;
         return false;
     }
 
-    m_map_info.grid_infos = new int8_t*[row];
-    for (int32_t i = 0; i < row; ++i)
+    m_map_info.grid_infos = new int8_t*[m_map_info.grid_row];
+    for (int32_t i = 0; i < m_map_info.grid_row; ++i)
     {
-        m_map_info.grid_infos[i] = new int8_t[col];
+        m_map_info.grid_infos[i] = new int8_t[m_map_info.grid_col];
     }
 
-    for (int32_t i = 0; i < row; ++i)
+    for (int32_t i = 0; i < m_map_info.grid_row; ++i)
     {
         auto& line = grids_vec[i];
-        if ((int32_t)line.length() != col)
+        if ((int32_t)line.length() != m_map_info.grid_col)
             continue;
-        for (int j = 0; j < col; ++j)
+        for (int j = 0; j < m_map_info.grid_col; ++j)
         {
             if ('1' == line[j])
             {
@@ -105,9 +128,9 @@ bool MapConfig::ParsseMapInfo(Json::Value &msg)
         }
     }
 
-    for (int i = 0; i < row; ++i )
+    for (int i = 0; i < m_map_info.grid_row; ++i )
     {
-        for (int j = 0; j < col; ++j)
+        for (int j = 0; j < m_map_info.grid_col; ++j)
         {
             printf("%d", m_map_info.grid_infos[i][j]);
         }
