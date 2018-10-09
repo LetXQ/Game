@@ -1,5 +1,6 @@
 #ifndef LOCK_H
 #define LOCK_H
+#include <pthread.h>
 
 class ILock
 {
@@ -22,10 +23,10 @@ public:
 class Lock
 {
 public:
-    Lock(const ILock& lock);
+    Lock(ILock& lock);
     ~Lock();
 private:
-    const ILock& m_lock;
+    ILock& m_lock;
 };
 
 #endif // LOCK_H

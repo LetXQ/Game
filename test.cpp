@@ -4,6 +4,7 @@
 
 #include "include/json/json.h"
 #include "include/config/mapconfig.h"
+#include "include/obj_move/astar.h"
 
 using namespace std;
 
@@ -25,6 +26,17 @@ int main(int argc, char* argv[])
     else
     {
         std::cout << "ParseConfigFile [" << argv[1] << "] failed!\n";
+    }
+
+    ret = MapConfig::Instance().IsBlockGrid(13, 9);
+    std::cout << "Ret: " << ret << std::endl;
+    Point start(500, 100), end(1700, 900);
+    PointList route_list;
+    ret = AStar::Instance().RouteToTargetPos(start, end, route_list);
+    std::cout << "Ret: " << (ret ? "Found it" : "Not Found") << ", size: " << route_list.size() << std::endl;
+    for (auto& elem : route_list)
+    {
+        std::cout << "[" << elem.x << ", " << elem.y << "]\n";
     }
     return 0;
 }

@@ -20,7 +20,7 @@ void CMutex::Unlock()
     pthread_mutex_unlock(&m_mutex);
 }
 
-Lock::Lock(const ILock& lock)
+Lock::Lock(ILock& lock)
     : m_lock(lock)
 {
     m_lock.Lock();

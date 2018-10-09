@@ -4,7 +4,7 @@
 #include <map>
 #include "../include/common/world_pos.h"
 #include "../include/common/common_def.h"
-
+#include "../include/common/singleton.h"
 enum NodeType
 {
     T_NONE = 0,
@@ -14,6 +14,23 @@ enum NodeType
 
 struct RouteNode
 {
+    void Reset()
+    {
+        in_close = false;
+        in_open = false;
+        node_type = 0;
+        g_val = 0;
+        h_val = 0;
+        x_grid = 0;
+        y_grid = 0;
+        p_parent = nullptr;
+    }
+
+    int32_t FVal() const
+    {
+        return g_val + h_val;
+    }
+
     bool in_close = false;
     bool in_open = false;
     int32_t node_type = 0;
@@ -26,7 +43,7 @@ struct RouteNode
 
 using RouteNodeVec = std::vector<RouteNode*>;
 using RouteNodeMap = std::map<int32_t, RouteNode*>;
-class AStar
+class AStar : public Singleton<AStar>
 {
 public:
     AStar();
@@ -47,8 +64,10 @@ private:
                      bool& same_grid);
 
     RouteNode* GetNodeFromCache();
-    int64_t GetKeyByGrid(int32_t x_grid, int32_t y_grid);
-
+    int32_t GetKeyByGrid(int16_t x_grid, int16_t y_grid);
+    RouteNode* GetMinFValNode(RouteNodeVec& node_vec);
+    void AddNewNode(RouteNodeVec& node_vec, RouteNode* new_node);
+    void UpdateBySurroundNodes(RouteNode* cur_node, RouteNodeVec& open_node_vec, RouteNodeMap& node_map, int32_t end_x_grid, int32_t end_y_grid);
     void ResetNode();
 
 private:

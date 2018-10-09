@@ -30,25 +30,16 @@ const MapInfo &MapConfig::GetMapInfo() const
 
 bool MapConfig::IsBlockGrid(int32_t x_grid, int32_t y_grid)
 {
-    int32_t tmp_x = x_grid, tmp_y = y_grid;
-    if (x_grid < 0)
-    {
-        tmp_x = 0;
-    }
-    else if (x_grid >= m_map_info.grid_col)
-    {
-        tmp_x = m_map_info.grid_col - 1;
-    }
-    if (y_grid < 0)
-    {
-        tmp_y = 0;
-    }
-    else if (y_grid >= m_map_info.grid_row)
-    {
-        tmp_y = m_map_info.grid_row - 1;
-    }
+    //std::cout << "row: " << m_map_info.grid_row << ", col: " << m_map_info.grid_col << std::endl;
+    if (!IsGridValid(x_grid, y_grid))
+        return true;
 
-    return !(m_map_info.grid_infos[tmp_x][tmp_y] == T_FREE_AREA);
+    return !(m_map_info.grid_infos[y_grid][x_grid] == T_FREE_AREA);
+}
+
+bool MapConfig::IsGridValid(int32_t x_grid, int32_t y_grid)
+{
+    return (x_grid >= 0) && (x_grid < m_map_info.grid_col) && (y_grid >= 0) && (y_grid < m_map_info.grid_row);
 }
 
 bool MapConfig::ParseJsonVal(Json::Value &msg)

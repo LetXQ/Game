@@ -33,6 +33,7 @@ public:
     void PrintConfigs() const;
     const MapInfo& GetMapInfo() const;
     bool IsBlockGrid(int32_t x_grid, int32_t y_grid);
+    bool IsGridValid(int32_t x_grid, int32_t y_grid);
 private:
     bool ParseJsonVal(Json::Value& msg);
     bool ParseSettingInfo(Json::Value& msg);
