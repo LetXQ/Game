@@ -28,8 +28,6 @@ int main(int argc, char* argv[])
         std::cout << "ParseConfigFile [" << argv[1] << "] failed!\n";
     }
 
-    ret = MapConfig::Instance().IsBlockGrid(13, 9);
-    std::cout << "Ret: " << ret << std::endl;
     Point start(500, 100), end(1700, 900);
     PointList route_list;
     ret = AStar::Instance().RouteToTargetPos(start, end, route_list);

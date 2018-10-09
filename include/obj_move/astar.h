@@ -48,14 +48,26 @@ class AStar : public Singleton<AStar>
 public:
     AStar();
     ~AStar();
+    /*
+     * 获取到达目标点的路径
+     * @param cur_pos: 起始点位置
+     * @param target: 目标点位置
+     * @param route: 路径
+    */
     bool RouteToTargetPos(const Point& cur_pos, const Point& target, PointList& route);
 
 private:
+    /*
+     * 是否在同一个网格
+    */
     bool CheckSameGrid(int32_t start_x_grid,
                        int32_t start_y_grid,
                        int32_t end_x_grid,
                        int32_t end_y_grid);
 
+    /*
+     * 获取最终的目标点，如果目标点周围都是阻挡物，选取阻挡物外面的点作为最终点
+    */
     bool GetFinalEnd(int32_t start_x_grid,
                      int32_t start_y_grid,
                      int32_t end_x_grid,
@@ -63,10 +75,29 @@ private:
                      RouteNodeMap& route_map,
                      bool& same_grid);
 
+    /*
+     * 从缓存中获取一个node
+    */
     RouteNode* GetNodeFromCache();
+
+    /*
+     * 根据网格坐标生成一个key
+    */
     int32_t GetKeyByGrid(int16_t x_grid, int16_t y_grid);
+
+    /*
+     * 从open列表中获取F值最小的点
+    */
     RouteNode* GetMinFValNode(RouteNodeVec& node_vec);
+
+    /*
+     * 添加新的node到open列表中，并从新调整堆
+    */
     void AddNewNode(RouteNodeVec& node_vec, RouteNode* new_node);
+
+    /*
+     * 遍历当前位置的周围8个点，更新open列表
+    */
     void UpdateBySurroundNodes(RouteNode* cur_node, RouteNodeVec& open_node_vec, RouteNodeMap& node_map, int32_t end_x_grid, int32_t end_y_grid);
     void ResetNode();
 

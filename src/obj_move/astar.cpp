@@ -75,6 +75,8 @@ bool AStar::RouteToTargetPos(const Point &cur_pos, const Point &target_pos, Poin
     RouteNodeMap route_node_map;
     route_node_map[GetKeyByGrid(cur_x_grid, cur_y_grid)] = start_node;
     bool b_same_grid = false;
+    // 目标点是单纯一个点，没有长宽
+    // 待实现：如果目标有长宽，可以将周围点都作为终点，放到 route_node_map里
     if (!GetFinalEnd(cur_x_grid, cur_y_grid, end_x_grid, end_y_grid, route_node_map, b_same_grid))
     {
         return false;
@@ -270,7 +272,6 @@ void AStar::UpdateBySurroundNodes(RouteNode *cur_node, RouteNodeVec &open_node_v
         {
             if (!MapConfig::Instance().IsGridValid(x, y) || ((x == cur_node->x_grid) && (y == cur_node->y_grid)))
             {
-//                std::cout << "IsGridValid x: " << x << ", y: " << y << std::endl;
                 continue;
             }
 
@@ -278,13 +279,11 @@ void AStar::UpdateBySurroundNodes(RouteNode *cur_node, RouteNodeVec &open_node_v
             if (MapConfig::Instance().IsBlockGrid(x, y)
                     && (node_map.count(key) == 0 || node_map[key]->node_type != T_END) )
             {
-//                std::cout << "IsBlockGrid x: " << x << ", y: " << y << std::endl;
                 continue;
             }
 
             if (node_map.count(key) == 0)
             {
-//                std::cout << "count x: " << x << ", y: " << y << std::endl;
                 RouteNode* new_node = GetNodeFromCache();
                 new_node->x_grid = x;
                 new_node->y_grid = y;
