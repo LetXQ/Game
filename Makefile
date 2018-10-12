@@ -6,7 +6,11 @@ INCLUDES = ./include/
 FLAGS = std=c++11 -g -Wall
 OFLAGS = fPIC -shared
 JSON_SRCS = ./src/json/*.cpp
-SRCS = ./src/common/*.cpp ./src/config/*.cpp ./src/obj_move/*.cpp ./test.cpp
+SRCS = ./src/common/*.cpp \
+	./src/config/*.cpp \
+	./src/obj/*.cpp \
+	./src/bt/*.cpp \
+	./test.cpp
 	
 test: $(SRCS)
 	g++ $^ -g -o $@ -$(FLAGS) -I$(INCLUDES) -L$(LIB_PATH) -l$(LOCAL_LIBS) -l$(LIBS)

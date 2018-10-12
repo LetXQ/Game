@@ -4,7 +4,7 @@
 
 #include "include/json/json.h"
 #include "include/config/mapconfig.h"
-#include "include/obj_move/astar.h"
+#include "include/obj/astar.h"
 
 using namespace std;
 

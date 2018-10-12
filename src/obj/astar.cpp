@@ -2,7 +2,7 @@
 #include <map>
 #include <algorithm>
 #include <iostream>
-#include "../include/obj_move/astar.h"
+#include "../include/obj/astar.h"
 #include "../include/config/mapconfig.h"
 
 constexpr int32_t MAX_NODE_SIZE = 100;
@@ -214,10 +214,10 @@ RouteNode *AStar::GetMinFValNode(RouteNodeVec &node_vec)
 {
     if (node_vec.empty())
         return nullptr;
-    for (auto elem : node_vec)
-    {
+    //for (auto elem : node_vec)
+    //{
         //std::cout << "["<<elem->x_grid << ", " << elem->y_grid << "] : "<<elem->FVal() << std::endl;
-    }
+    //}
     RouteNode* res = node_vec[0];
     std::swap(node_vec[0], node_vec[node_vec.size() - 1]);
     node_vec.erase(node_vec.begin() + node_vec.size() - 1);
