@@ -1,0 +1,52 @@
+{
+	"version": 0,
+	"root":{
+		"Name": "Panda"
+		"ID": 1,
+		"Type" : "BTNode.Selector",
+		"Children":[
+			{
+				"ID": 2,
+				"Type" : "BTNode.Sequence",
+				"Children": [{
+					"ID": 3,
+					"Type": "BTNode.FindTarget",
+					"ParamTarget": {
+						"Name": "TargetID"
+					}
+				},
+				{
+					"ID": 4,
+					"Type": "BTNode.Attack",
+					"ParamAttackTarget":{
+						"Name": "TargetID"
+					},
+					"ParamAttackSkillID":{
+						"SkillID": 19
+					}	
+				}]
+			},
+			{
+				"ID": 5,
+				"Type": "BTNode.Selector",
+				"Children": [{
+					"ID": 6,
+					"Type": "BTNode.Sleep",
+					"ParamSleepTime":{
+						"SleepTime": 10
+					}
+				},
+				{
+					"ID": 7,
+					"Type": "BTNode.Walk",
+					"ParamWalkTime":{
+						"WalkTime": 100
+					},
+					"ParamWalkMaxDistance":{
+						"MaxDistance": 50
+					}
+				}]
+			}
+		]
+	}
+}
