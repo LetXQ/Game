@@ -1,7 +1,7 @@
 {
 	"version": 0,
 	"root":{
-		"Name": "Panda"
+		"Name": "Panda",
 		"ID": 1,
 		"Type" : "BTNode.Selector",
 		"Children":[

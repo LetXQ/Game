@@ -4,7 +4,14 @@
 
 class BtConditionNode : public BtNode
 {
+public:
+    BtConditionNode(BtNode* parent) : BtNode(parent) {}
+};
 
+class BtFindTargetNode : public BtConditionNode
+{
+public:
+    BtFindTargetNode(BtNode* parent) : BtConditionNode(parent) {}
 };
 
 #endif // BT_CONDITION_NODE_H

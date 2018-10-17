@@ -4,6 +4,7 @@
 
 #include "include/json/json.h"
 #include "include/config/mapconfig.h"
+#include "include/config/bt_parse.h"
 #include "include/obj/astar.h"
 
 using namespace std;
@@ -11,7 +12,7 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-    if (argc != 2)
+    if (argc != 3)
     {
         printf("Usage %s [filename]\n", argv[0]);
         exit(-1);
@@ -35,6 +36,13 @@ int main(int argc, char* argv[])
     for (auto& elem : route_list)
     {
         std::cout << "[" << elem.x << ", " << elem.y << "]\n";
+    }
+
+    ret = BtParse::Instance().ParseConfigFile(argv[2]);
+    if (ret)
+    {
+        auto root_node = BtParse::Instance().GetBtRootNode("Panda");
+        std::cout << "Root: " << root_node << std::endl;
     }
     return 0;
 }

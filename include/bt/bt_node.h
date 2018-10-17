@@ -4,16 +4,30 @@
 #include <cstdint>
 #include "../include/json/json.h"
 
+enum BT_STATUS
+{
+    S_SUCCESS,
+    S_FAILED,
+    S_RUNNING
+};
+
 class BtNode;
 using BtNodeVec = std::vector<BtNode*>;
-
+class BtProxy;
 class BtNode
 {
 public:
     BtNode(BtNode* parent);
+
     virtual ~BtNode();
-    void SetID(int32_t id);
     virtual bool Init(Json::Value& js);
+
+    BT_STATUS Run(BtProxy* proxy, int32_t now_time);
+
+    void SetID(int32_t id);
+
+protected:
+    virtual BT_STATUS DoRun(BtProxy* proxy, int32_t now_time) = 0;
 private:
     int32_t m_ID = 0;
     int32_t m_iRunningIndex = 0;

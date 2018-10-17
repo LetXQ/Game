@@ -1,26 +1,14 @@
 #include "../include/bt/bt_node_factory.h"
-#include "../include/bt/bt_action_node.h"
-#include "../include/bt/bt_condition_node.h"
-#include "../include/bt/bt_control_node.h"
-
-BtNode* CreateSelectorNode(BtNode* parent)
-{
-    return new BtSelectorNode(parent);
-}
-
-BtNode* CreateSequenceNode(BtNode* parent)
-{
-    return new BtSequenceNode(parent);
-}
-
-#define INIT_CREATE_FUNC(name) { \
-        m_CreateFuncs.insert(std::make_pair(#name, Create##name##Node)); \
-    }
+#include "../include/bt/bt_create_node_funcs.h"
 
 void BtNodeFactory::Init()
 {
     INIT_CREATE_FUNC(Selector);
     INIT_CREATE_FUNC(Sequence);
+    INIT_CREATE_FUNC(FindTarget);
+    INIT_CREATE_FUNC(Attack);
+    INIT_CREATE_FUNC(Walk);
+    INIT_CREATE_FUNC(Sleep);
 }
 
 BtNode *BtNodeFactory::CreateNode(const std::string &type, BtNode* parent)
@@ -28,8 +16,11 @@ BtNode *BtNodeFactory::CreateNode(const std::string &type, BtNode* parent)
     auto iter = m_CreateFuncs.find(type);
     if (iter != m_CreateFuncs.end())
     {
-        auto new_node = iter->second(parent);
-        return new_node;
+        BtNode * new_node = iter->second(parent);
+        if (new_node)
+            return new_node;
+        std::cout << "Found new failed\n";
     }
+    std::cout << "Not found size: " << m_CreateFuncs.size() << std::endl;
     return nullptr;
 }

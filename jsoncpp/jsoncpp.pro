@@ -17,7 +17,11 @@ SOURCES += \
     ../src/config/bt_parse.cpp \
     ../src/obj/astar.cpp \
     ../src/bt/bt_node.cpp \
-    ../src/bt/bt_node_factory.cpp
+    ../src/bt/bt_node_factory.cpp \
+    ../src/bt/bt_action_node.cpp \
+    ../src/bt/bt_condition_node.cpp \
+    ../src/bt/bt_control_node.cpp \
+    ../src/bt/bt_proxy.cpp
 
 HEADERS += \
     ../include/json/autolink.h \
@@ -43,7 +47,8 @@ HEADERS += \
     ../include/bt/bt_node_factory.h \
     ../include/bt/bt_control_node.h \
     ../include/bt/bt_action_node.h \
-    ../include/bt/bt_condition_node.h
+    ../include/bt/bt_condition_node.h \
+    ../include/bt/bt_create_node_funcs.h
 
 DISTFILES += \
     ../src/json/sconscript

@@ -11,13 +11,13 @@ public:
 class BtSelectorNode : public BtControlNode
 {
 public:
-    BtSelectorNode(BtNode* parent) : BtSelectorNode(parent){}
+    BtSelectorNode(BtNode* parent) : BtControlNode(parent){}
 };
 
 class BtSequenceNode : public BtControlNode
 {
 public:
-    BtSequenceNode(BtNode* parent) : BtSequenceNode(parent){}
+    BtSequenceNode(BtNode* parent) : BtControlNode(parent){}
 };
 
 #endif // BT_CONTROL_NODE_H
