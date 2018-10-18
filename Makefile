@@ -10,6 +10,8 @@ SRCS = ./src/common/*.cpp \
 	./src/config/*.cpp \
 	./src/obj/*.cpp \
 	./src/bt/*.cpp \
+	./src/bt_node/action/*.cpp \
+	./src/bt_node/condition/*.cpp \
 	./test.cpp
 	
 test: $(SRCS)

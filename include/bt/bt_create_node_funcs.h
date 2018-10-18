@@ -1,9 +1,11 @@
 #ifndef BT_CREATE_NODE_FUNCS_H
 #define BT_CREATE_NODE_FUNCS_H
-
-#include "../include/bt/bt_action_node.h"
-#include "../include/bt/bt_condition_node.h"
+#include "../include/bt/bt_node.h"
 #include "../include/bt/bt_control_node.h"
+#include "../include/bt_node/action/bt_attack_node.h"
+#include "../include/bt_node/action/bt_sleep_node.h"
+#include "../include/bt_node/action/bt_walk_node.h"
+#include "../include/bt_node/condition/bt_find_target_node.h"
 
 BtNode* CreateSelectorNode(BtNode* parent)
 {

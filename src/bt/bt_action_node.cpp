@@ -1,39 +1,58 @@
 #include "../include/bt/bt_action_node.h"
-#include "../include/common/common_func.h"
+#include "../include/bt/bt_proxy.h"
 
-bool BtAttackNode::Init(Json::Value &js)
+
+BT_STATUS BtActionNode::DoRun(BtProxy *proxy, int32_t now_time, int32_t &exec_idx)
 {
-    if (!js["ParamAttackSkillID"].isNull())
-    {
-        CommonFuncs::ParseIntByKey(js["ParamAttackSkillID"], "SkillID", m_SkillID);
-    }
+    BT_STATUS ret = S_SUCCESS;
+    do {
+        if (AS_IDLE == m_ActionStatus)
+        {
+            if (proxy && proxy->LastRunning())
+            {
+                BtNode* node = m_pParent;
+                // 找到当前节点和上一帧正在执行中节点最近的共同父节点
+                while (node && !node->IsLastRunning())
+                {
+                    node = node->GetParent();
+                }
 
-    if (!js["ParamAttackTarget"].isNull())
+                if (node)
+                {
+                    BtNode* running_node = node->GetRunningNode();
+                    if (running_node)
+                    {
+                        running_node->Finish(proxy);
+                    }
+                }
+            }
+
+            if (!StartAction(proxy, now_time))
+            {
+                ret = S_FAILED;
+                break;
+            }
+
+            m_ActionStatus = AS_RUNNING;
+        }
+
+        ret = DoAction(proxy, now_time);
+    } while(0);
+
+    if (S_SUCCESS == ret || S_FAILED == ret)
     {
-        CommonFuncs::ParseStringtByKey(js["ParamAttackTarget"], "Name", m_ParamName);
+        Finish(proxy);
     }
-    return true;
+    return ret;
 }
 
-bool BtSleepNode::Init(Json::Value &js)
+void BtActionNode::DoFinish(BtProxy *proxy)
 {
-    if (!js["ParamSleepTime"].isNull())
-    {
-        CommonFuncs::ParseIntByKey(js["ParamSleepTime"], "SleepTime", m_SleepTime);
-    }
-    return true;
+    DoFinshAction(proxy);
 }
 
-bool BtWalkNode::Init(Json::Value &js)
+void BtActionNode::DoFinshAction(BtProxy *proxy)
 {
-    if (!js["ParamWalkTime"].isNull())
-    {
-        CommonFuncs::ParseIntByKey(js["ParamWalkTime"], "WalkTime", m_WalkTime);
-    }
-
-    if (!js["ParamWalkTime"].isNull())
-    {
-        CommonFuncs::ParseIntByKey(js["ParamWalkTime"], "MaxDistance", m_WalkMaxDist);
-    }
-    return true;
+    FinshAction(proxy);
+    m_ActionStatus = AS_IDLE;
 }

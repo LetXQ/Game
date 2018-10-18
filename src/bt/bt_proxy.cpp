@@ -13,6 +13,15 @@ bool BtProxy::Init(const std::string &obj_name)
 
 void BtProxy::OnTimeUpdate(int32_t now_time)
 {
+    if (m_pRoot)
+    {
+        auto ret = m_pRoot->Run(this, now_time);
+        m_LastRunning = (S_RUNNING == ret) ? true : false;
+    }
+}
 
+bool BtProxy::LastRunning() const
+{
+    return m_LastRunning;
 }
 

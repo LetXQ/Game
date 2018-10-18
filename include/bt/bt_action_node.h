@@ -6,38 +6,25 @@ class BtActionNode : public BtNode
 {
 public:
     BtActionNode(BtNode* parent) : BtNode(parent) {}
-};
+    virtual ~BtActionNode() {}
 
-class BtAttackNode : public BtActionNode
-{
-public:
-    BtAttackNode(BtNode* parent) : BtActionNode(parent) {}
-    bool Init(Json::Value& js) override;
+    BT_STATUS DoRun(BtProxy* proxy, int32_t now_time, int32_t& exec_idx) override;
 
-private:
-    int32_t m_SkillID = 0;
-    std::string m_ParamName = "";
-};
+protected:
+    void DoFinish(BtProxy* proxy) override;
+    virtual void DoFinshAction(BtProxy* proxy);
 
-class BtSleepNode : public BtActionNode
-{
-public:
-    BtSleepNode(BtNode* parent) : BtActionNode(parent) {}
-    bool Init(Json::Value& js) override;
+    virtual bool StartAction(BtProxy* proxy, int32_t now_time) = 0;
+    virtual BT_STATUS DoAction(BtProxy* proxy, int32_t now_time) = 0;
+    virtual void FinshAction(BtProxy* proxy) = 0;
+protected:
+    enum ActionNodeStatus
+    {
+        AS_IDLE,
+        AS_RUNNING,
+    };
 
-private:
-    int32_t m_SleepTime = 0;
-};
-
-class BtWalkNode : public BtActionNode
-{
-public:
-    BtWalkNode(BtNode* parent) : BtActionNode(parent) {}
-    bool Init(Json::Value& js) override;
-
-private:
-    int32_t m_WalkTime = 0;
-    int32_t m_WalkMaxDist = 0;
+    ActionNodeStatus m_ActionStatus = AS_IDLE;
 };
 
 #endif // BT_ACTION_NODE_H

@@ -21,7 +21,12 @@ SOURCES += \
     ../src/bt/bt_action_node.cpp \
     ../src/bt/bt_condition_node.cpp \
     ../src/bt/bt_control_node.cpp \
-    ../src/bt/bt_proxy.cpp
+    ../src/bt/bt_proxy.cpp \
+    ../src/bt_node/action/bt_attack_node.cpp \
+    ../src/bt_node/condition/bt_find_target_node.cpp \
+    ../src/bt_node/action/bt_attack_node.cpp \
+    ../src/bt_node/action/bt_sleep_node.cpp \
+    ../src/bt_node/action/bt_walk_node.cpp
 
 HEADERS += \
     ../include/json/autolink.h \
@@ -48,7 +53,14 @@ HEADERS += \
     ../include/bt/bt_control_node.h \
     ../include/bt/bt_action_node.h \
     ../include/bt/bt_condition_node.h \
-    ../include/bt/bt_create_node_funcs.h
+    ../include/bt/bt_create_node_funcs.h \
+    ../include/bt_node/action/bt_attack_node.h \
+    ../include/bt_node/condition/bt_find_target_node.h \
+    ../src/bt_node/action/bt_sleep_node.h \
+    ../src/bt_node/action/bt_walk_node.h \
+    ../src/bt_node/action/bt_attack_node.h \
+    ../include/bt_node/action/bt_sleep_node.h \
+    ../include/bt_node/action/bt_walk_node.h
 
 DISTFILES += \
     ../src/json/sconscript
