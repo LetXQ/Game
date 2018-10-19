@@ -14,7 +14,7 @@ protected:
     void FinshAction(BtProxy* proxy) override;
 
 private:
-    int32_t m_SleepTime = 0;
+    int32_t m_SleepSkillID = 0;
 };
 
 #endif // BT_SLEEP_NODE_H

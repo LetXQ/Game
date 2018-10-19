@@ -1,14 +1,14 @@
 #include <algorithm>
 
 #include "../include/config/mapconfig.h"
-#include "../include/common/common_func.h"
+#include "../include/common/common_json_func.h"
 
 bool MapConfig::ParseConfigFile(const std::string &file_name)
 {
     Json::Value msg;
-    if (CommonFuncs::ParseJsonFile(file_name, msg))
+    if (CommonJsonFunc::ParseJsonFile(file_name, msg))
     {
-        CommonFuncs::ParseIntByKey(msg, "version", m_version);
+        CommonJsonFunc::ParseIntByKey(msg, "version", m_version);
         if (!msg["contents"].isNull())
         {
             return ParseJsonVal(msg["contents"]);
@@ -55,32 +55,32 @@ bool MapConfig::ParseJsonVal(Json::Value &msg)
     if (!ParseSettingInfo(msg["SettingInfo"]))
         return false;
 
-    CommonFuncs::ParseIntByKey(msg, "ID", m_map_id);
+    CommonJsonFunc::ParseIntByKey(msg, "ID", m_map_id);
     return true;
 }
 
 bool MapConfig::ParseSettingInfo(Json::Value &msg)
 {
-    CommonFuncs::ParseIntByKey(msg, "SceneType", m_setting_info.scene_type);
-    CommonFuncs::ParseIntByKey(msg, "PKType", m_setting_info.pk_type);
-    CommonFuncs::ParseIntByKey(msg, "TeamType", m_setting_info.team_type);
+    CommonJsonFunc::ParseIntByKey(msg, "SceneType", m_setting_info.scene_type);
+    CommonJsonFunc::ParseIntByKey(msg, "PKType", m_setting_info.pk_type);
+    CommonJsonFunc::ParseIntByKey(msg, "TeamType", m_setting_info.team_type);
     return true;
 }
 
 bool MapConfig::ParsseMapInfo(Json::Value &msg)
 {
-    CommonFuncs::ParseIntByKey(msg, "VisionSize", m_map_info.vision_size);
+    CommonJsonFunc::ParseIntByKey(msg, "VisionSize", m_map_info.vision_size);
     std::vector<double> tmp;
-    CommonFuncs::ParseDoubleVectorByKey(msg, "StartPos", tmp);
+    CommonJsonFunc::ParseDoubleVectorByKey(msg, "StartPos", tmp);
     m_map_info.start_pos.x = tmp[0];
     m_map_info.start_pos.y = tmp [1];
     tmp.clear();
-    CommonFuncs::ParseDoubleVectorByKey(msg, "EndPos", tmp);
+    CommonJsonFunc::ParseDoubleVectorByKey(msg, "EndPos", tmp);
     m_map_info.end_pos.x = tmp[0];
     m_map_info.end_pos.y = tmp[1];
 
     std::vector<std::string> grids_vec;
-    CommonFuncs::ParseStringVectorByKey(msg, "GridInfo", grids_vec);
+    CommonJsonFunc::ParseStringVectorByKey(msg, "GridInfo", grids_vec);
 
     m_map_info.grid_col = abs(m_map_info.end_pos.x - m_map_info.start_pos.x) / 100;
     m_map_info.grid_row = abs(m_map_info.end_pos.y - m_map_info.start_pos.y) / 100;

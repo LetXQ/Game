@@ -1,16 +1,16 @@
 #include "../include/bt_node/action/bt_attack_node.h"
-#include "../include/common/common_func.h"
+#include "../include/common/common_json_func.h"
 
 bool BtAttackNode::Init(Json::Value &js)
 {
     if (!js["ParamAttackSkillID"].isNull())
     {
-        CommonFuncs::ParseIntByKey(js["ParamAttackSkillID"], "SkillID", m_SkillID);
+        CommonJsonFunc::ParseIntByKey(js["ParamAttackSkillID"], "SkillID", m_SkillID);
     }
 
     if (!js["ParamAttackTarget"].isNull())
     {
-        CommonFuncs::ParseStringtByKey(js["ParamAttackTarget"], "Name", m_ParamName);
+        CommonJsonFunc::ParseStringtByKey(js["ParamAttackTarget"], "Name", m_ParamName);
     }
     return true;
 }

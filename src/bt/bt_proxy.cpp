@@ -25,3 +25,8 @@ bool BtProxy::LastRunning() const
     return m_LastRunning;
 }
 
+BtNode *BtProxy::GetRoot()
+{
+    return m_pRoot;
+}
+

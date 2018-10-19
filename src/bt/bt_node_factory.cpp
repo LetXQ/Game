@@ -3,9 +3,13 @@
 
 void BtNodeFactory::Init()
 {
+    INIT_CREATE_FUNC(RunTime);
+
     INIT_CREATE_FUNC(Selector);
     INIT_CREATE_FUNC(Sequence);
+
     INIT_CREATE_FUNC(FindTarget);
+
     INIT_CREATE_FUNC(Attack);
     INIT_CREATE_FUNC(Walk);
     INIT_CREATE_FUNC(Sleep);

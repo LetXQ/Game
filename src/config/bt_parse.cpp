@@ -1,5 +1,6 @@
 #include "../include/config/bt_parse.h"
 #include "../include/common/common_func.h"
+#include "../include/common/common_json_func.h"
 #include "../include/bt/bt_node_factory.h"
 #include "../include/bt/bt_node.h"
 
@@ -7,10 +8,10 @@ bool BtParse::ParseConfigFile(const std::string &file_name)
 {
     m_sFile = file_name;
     Json::Value msg;
-    if (CommonFuncs::ParseJsonFile(m_sFile, msg))
+    if (CommonJsonFunc::ParseJsonFile(m_sFile, msg))
     {
         BtNodeFactory::Instance().Init();
-        CommonFuncs::ParseIntByKey(msg, "version", m_iVersion);
+        CommonJsonFunc::ParseIntByKey(msg, "version", m_iVersion);
         if (!msg["root"].isNull())
         {
             return ParseBtData(msg["root"]);
@@ -41,7 +42,7 @@ BtNode *BtParse::GetBtRootNode(const string &obj_name)
 bool BtParse::ParseBtData(Json::Value &msg)
 {
     std::string obj_name = "";
-    CommonFuncs::ParseStringtByKey(msg, "Name", obj_name);
+    CommonJsonFunc::ParseStringtByKey(msg, "Name", obj_name);
     m_BtJsonMap.insert(std::make_pair(obj_name, msg));
     return true;
 }
@@ -50,8 +51,8 @@ bool BtParse::ParseNode(Json::Value &data, BtNode *&root_p, BtNode *parent_node)
 {
     int32_t id = 0;
     std::string type = "", str = "";
-    CommonFuncs::ParseIntByKey(data, "ID", id);
-    CommonFuncs::ParseStringtByKey(data, "Type", str);
+    CommonJsonFunc::ParseIntByKey(data, "ID", id);
+    CommonJsonFunc::ParseStringtByKey(data, "Type", str);
 
     CommonFuncs::GetLastToken(str, type);
     BtNode* new_node = BtNodeFactory::Instance().CreateNode(type, parent_node);

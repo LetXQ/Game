@@ -31,19 +31,30 @@
 				"Type": "BTNode.Selector",
 				"Children": [{
 					"ID": 6,
-					"Type": "BTNode.Sleep",
+					"Type": "BTNode.RunTime",
 					"ParamSleepTime":{
-						"SleepTime": 10
-					}
+						"LowerTime": 10,
+						"UpperTime": 20
+					},
+					"Children":[{
+						"ID": 7,
+						"Type": "BTNode.Sleep",
+						"ParamSleepSkillID":{
+							"SkillID": 10
+						}
+					}]					
 				},
 				{
-					"ID": 7,
+					"ID": 8,
 					"Type": "BTNode.Walk",
-					"ParamWalkTime":{
-						"WalkTime": 100
+					"ParamWalkSkillID":{
+						"SkillID": 100
 					},
-					"ParamWalkMaxDistance":{
-						"MaxDistance": 50
+					"ParamWalkAreaRadius":{
+						"WalkAreaRadius": 50
+					},
+					"ParamWalkSpeed": {
+						"WalkSpeed" : 10
 					}
 				}]
 			}

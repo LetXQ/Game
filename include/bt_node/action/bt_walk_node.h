@@ -14,8 +14,9 @@ protected:
     void FinshAction(BtProxy* proxy) override;
 
 private:
-    int32_t m_WalkTime = 0;
-    int32_t m_WalkMaxDist = 0;
+    int32_t m_WalkSkillID = 0;
+    int32_t m_WalkAreaRadius = 0;
+    int32_t m_WalkSpeed = 0;
 };
 
 #endif // BT_WALK_NODE_H

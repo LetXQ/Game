@@ -1,11 +1,11 @@
 #include "../include/bt_node/action/bt_sleep_node.h"
-#include "../include/common/common_func.h"
+#include "../include/common/common_json_func.h"
 
 bool BtSleepNode::Init(Json::Value &js)
 {
-    if (!js["ParamSleepTime"].isNull())
+    if (!js["ParamSleepSkillID"].isNull())
     {
-        CommonFuncs::ParseIntByKey(js["ParamSleepTime"], "SleepTime", m_SleepTime);
+        CommonJsonFunc::ParseIntByKey(js["ParamSleepSkillID"], "SkillID", m_SleepSkillID);
     }
     return true;
 }

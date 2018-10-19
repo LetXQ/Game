@@ -1,16 +1,21 @@
 #include "../include/bt_node/action/bt_walk_node.h"
-#include "../include/common/common_func.h"
+#include "../include/common/common_json_func.h"
 
 bool BtWalkNode::Init(Json::Value &js)
 {
-    if (!js["ParamWalkTime"].isNull())
+    if (!js["ParamWalkSkillID"].isNull())
     {
-        CommonFuncs::ParseIntByKey(js["ParamWalkTime"], "WalkTime", m_WalkTime);
+        CommonJsonFunc::ParseIntByKey(js["ParamWalkSkillID"], "SkillID", m_WalkSkillID);
     }
 
-    if (!js["ParamWalkTime"].isNull())
+    if (!js["ParamWalkAreaRadius"].isNull())
     {
-        CommonFuncs::ParseIntByKey(js["ParamWalkTime"], "MaxDistance", m_WalkMaxDist);
+        CommonJsonFunc::ParseIntByKey(js["ParamWalkAreaRadius"], "WalkAreaRadius", m_WalkAreaRadius);
+    }
+
+    if (!js["ParamWalkSpeed"].isNull())
+    {
+        CommonJsonFunc::ParseIntByKey(js["ParamWalkSpeed"], "WalkSpeed", m_WalkSpeed);
     }
     return true;
 }

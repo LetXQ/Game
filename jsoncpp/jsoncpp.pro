@@ -26,7 +26,8 @@ SOURCES += \
     ../src/bt_node/condition/bt_find_target_node.cpp \
     ../src/bt_node/action/bt_attack_node.cpp \
     ../src/bt_node/action/bt_sleep_node.cpp \
-    ../src/bt_node/action/bt_walk_node.cpp
+    ../src/bt_node/action/bt_walk_node.cpp \
+    ../src/bt/bt_decorator_node.cpp
 
 HEADERS += \
     ../include/json/autolink.h \
@@ -60,7 +61,10 @@ HEADERS += \
     ../src/bt_node/action/bt_walk_node.h \
     ../src/bt_node/action/bt_attack_node.h \
     ../include/bt_node/action/bt_sleep_node.h \
-    ../include/bt_node/action/bt_walk_node.h
+    ../include/bt_node/action/bt_walk_node.h \
+    ../include/bt/bt_decorator_node.h \
+    ../include/common/common_json_func.h \
+    ../include/common/random.h
 
 DISTFILES += \
     ../src/json/sconscript

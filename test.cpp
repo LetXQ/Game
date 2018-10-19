@@ -6,6 +6,7 @@
 #include "include/config/mapconfig.h"
 #include "include/config/bt_parse.h"
 #include "include/obj/astar.h"
+#include "include/bt/bt_proxy.h"
 
 using namespace std;
 
@@ -41,8 +42,10 @@ int main(int argc, char* argv[])
     ret = BtParse::Instance().ParseConfigFile(argv[2]);
     if (ret)
     {
-        auto root_node = BtParse::Instance().GetBtRootNode("Panda");
-        std::cout << "Root: " << root_node << std::endl;
+        BtProxy bt_proxy;
+        ret = bt_proxy.Init("Panda");
+
+        std::cout <<"Ret: " << ret << "Root: " << bt_proxy.GetRoot() << std::endl;
     }
     return 0;
 }
