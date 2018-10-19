@@ -7,6 +7,7 @@
 #include "include/config/bt_parse.h"
 #include "include/obj/astar.h"
 #include "include/bt/bt_proxy.h"
+#include "include/bt/bt_node.h"
 
 using namespace std;
 
@@ -46,6 +47,10 @@ int main(int argc, char* argv[])
         ret = bt_proxy.Init("Panda");
 
         std::cout <<"Ret: " << ret << "Root: " << bt_proxy.GetRoot() << std::endl;
+        if (bt_proxy.GetRoot())
+        {
+
+        }
     }
     return 0;
 }

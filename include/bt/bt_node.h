@@ -12,14 +12,14 @@ enum BT_STATUS
 };
 constexpr int32_t INVALID_IDX = -1;
 class BtNode;
-using BtNodeVec = std::vector<BtNode*>;
+using BtNodePtrVec = std::vector<BtNode*>;
 class BtProxy;
 class BtNode
 {
 public:
     BtNode(BtNode* parent);
-
     virtual ~BtNode();
+
     virtual bool Init(Json::Value& js);
 
     BT_STATUS Run(BtProxy* proxy, int32_t now_time);
@@ -45,7 +45,7 @@ protected:
     int32_t m_ID = 0;
     int32_t m_iRunningIndex = INVALID_IDX;
     BtNode* m_pParent = nullptr;
-    BtNodeVec m_ChildrenNode;
+    BtNodePtrVec m_ChildrenNode;
 };
 
 #endif // !BT_NODE_H_

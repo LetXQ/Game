@@ -51,10 +51,11 @@ bool BtParse::ParseNode(Json::Value &data, BtNode *&root_p, BtNode *parent_node)
 {
     int32_t id = 0;
     std::string type = "", str = "";
+
     CommonJsonFunc::ParseIntByKey(data, "ID", id);
     CommonJsonFunc::ParseStringtByKey(data, "Type", str);
-
     CommonFuncs::GetLastToken(str, type);
+
     BtNode* new_node = BtNodeFactory::Instance().CreateNode(type, parent_node);
     if (!new_node)
     {
@@ -75,7 +76,7 @@ bool BtParse::ParseNode(Json::Value &data, BtNode *&root_p, BtNode *parent_node)
     {
         for (auto& elem : data["Children"])
         {
-            if (!ParseNode(elem, new_node))
+            if (!ParseNode(elem, root_p, new_node))
             {
                 return false;
             }

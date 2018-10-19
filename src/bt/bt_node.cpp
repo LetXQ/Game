@@ -3,9 +3,9 @@
 BtNode::BtNode(BtNode *parent)
     : m_pParent(parent)
 {
-    if (!parent)
+    if (parent)
     {
-        m_ChildrenNode.push_back(this);
+        parent->m_ChildrenNode.push_back(this);
     }
 }
 

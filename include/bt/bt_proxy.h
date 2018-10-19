@@ -11,6 +11,7 @@ public:
     void OnTimeUpdate(int32_t now_time);
     bool LastRunning() const;
     BtNode* GetRoot();
+
 private:
     bool m_LastRunning = false;
     BtNode* m_pRoot = nullptr;
