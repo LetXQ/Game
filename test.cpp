@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string.h>
+#include <unistd.h>
 
 #include "include/json/json.h"
 #include "include/config/mapconfig.h"
@@ -11,6 +12,27 @@
 
 using namespace std;
 
+void StartBT(const std::string& obj_name)
+{
+    bool ret = BtParse::Instance().ParseConfigFile(obj_name);
+    if (ret)
+    {
+        BtProxy bt_proxy;
+        ret = bt_proxy.Init("Panda");
+
+        std::cout <<"Ret: " << ret << "Root: " << bt_proxy.GetRoot() << std::endl;
+        if (bt_proxy.GetRoot())
+        {
+            int32_t now_time = 100;
+            while (true)
+            {
+                bt_proxy.OnTimeUpdate(now_time);
+                now_time += 3;
+                sleep(1);
+            }
+        }
+    }
+}
 
 int main(int argc, char* argv[])
 {
@@ -40,17 +62,6 @@ int main(int argc, char* argv[])
         std::cout << "[" << elem.x << ", " << elem.y << "]\n";
     }
 
-    ret = BtParse::Instance().ParseConfigFile(argv[2]);
-    if (ret)
-    {
-        BtProxy bt_proxy;
-        ret = bt_proxy.Init("Panda");
-
-        std::cout <<"Ret: " << ret << "Root: " << bt_proxy.GetRoot() << std::endl;
-        if (bt_proxy.GetRoot())
-        {
-
-        }
-    }
+    StartBT(argv[2]);
     return 0;
 }

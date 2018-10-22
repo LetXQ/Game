@@ -12,7 +12,9 @@ protected:
     bool StartAction(BtProxy* proxy, int32_t now_time) override;
     BT_STATUS DoAction(BtProxy* proxy, int32_t now_time) override;
     void FinshAction(BtProxy* proxy) override;
+
 private:
+    int32_t m_TargetID = 0;
     int32_t m_SkillID = 0;
     std::string m_ParamName = "";
 };

@@ -10,6 +10,9 @@ public:
 
 protected:
     bool IsValid(BtProxy *proxy, int32_t now_time) override;
+
+private:
+    std::string m_ParamName = "";
 };
 
 #endif

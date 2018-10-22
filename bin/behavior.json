@@ -28,7 +28,7 @@
 			},
 			{
 				"ID": 5,
-				"Type": "BTNode.Selector",
+				"Type": "BTNode.Sequence",
 				"Children": [{
 					"ID": 6,
 					"Type": "BTNode.RunTime",

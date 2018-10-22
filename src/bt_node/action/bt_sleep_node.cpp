@@ -7,20 +7,26 @@ bool BtSleepNode::Init(Json::Value &js)
     {
         CommonJsonFunc::ParseIntByKey(js["ParamSleepSkillID"], "SkillID", m_SleepSkillID);
     }
+    std::cout << "Sleep init\n";
     return true;
 }
 
 bool BtSleepNode::StartAction(BtProxy *proxy, int32_t now_time)
 {
+    // check status ok
+     std::cout << "Start Sleep\n";
     return true;
 }
 
 BT_STATUS BtSleepNode::DoAction(BtProxy *proxy, int32_t now_time)
 {
-    return S_SUCCESS;
+    // use sleep skill
+    std::cout << "Sleep\n";
+    return S_RUNNING;
 }
 
 void BtSleepNode::FinshAction(BtProxy *proxy)
 {
-
+     std::cout << "Finsh Sleep\n";
+    // change status;
 }
